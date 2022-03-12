@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get '/cocktails', to: 'cocktails#index', as: 'cocktails'
+  get '/cocktails/:id', to: 'cocktails#show', as: 'cocktail'
+    # :id -> this is a dynamic variable
+      # represents anything after the slash
 end
