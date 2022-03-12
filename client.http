@@ -1,0 +1,12 @@
+GET http://localhost:3000/cocktails
+
+###
+
+POST http://localhost:3000/cocktails
+content-type: application/json
+
+{
+    "name": "Fruit Tingle",
+    "base": "vodka",
+    "instructions": "Put in vodka and colours"
+}
