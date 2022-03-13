@@ -18,12 +18,6 @@
     "instructions": "Fill a high ball glass with ice. Add gin and lime juice. Then top with tonic water. Garnish with lime wedge or slice."
   },
   {
-    "id": 4,
-    "name": "Fruity Tingle",
-    "base": "vodka",
-    "instructions": "Put in vodka and colours"
-  },
-  {
     "id": 5,
     "name": "Martini",
     "base": "gin",

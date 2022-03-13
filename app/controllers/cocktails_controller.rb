@@ -3,7 +3,7 @@ require 'json'
 class CocktailsController < ApplicationController
 
     before_action :load_cocktails
-    before_action :set_cocktail, only: [:show, :update]
+    before_action :set_cocktail, only: [:show, :update, :destroy]
         # before action only on specified actions instead of all of them
     skip_before_action :verify_authenticity_token
 
@@ -40,6 +40,12 @@ class CocktailsController < ApplicationController
         render json: new_cocktail
     end
 
+    def destroy
+        @cocktails.delete_at(@index)
+        save_cocktails(@cocktails)
+        redirect_to cocktails_path
+    end
+
     private
 
     def load_cocktails
@@ -56,11 +62,11 @@ class CocktailsController < ApplicationController
             # saves cocktail where params id equals the id of the cocktail within the stored array of cocktails
         @cocktail = @cocktails.find {|cocktail| cocktail["id"] == params[:id].to_i}
             # takes the stored cocktail and using the id of that cocktails attempts to find the index value of that cocktail within the cocktails array
-        @index = @cocktails.index {|cocktail| cocktail["id"] == @cocktail["id"]}
-
         unless @cocktail
             render file: "public/404.html", status: :not_found, layout: false
+            return
         end
+        @index = @cocktails.index {|cocktail| cocktail["id"] == @cocktail["id"]}
     end
 
 end
