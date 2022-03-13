@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get '/cocktails', to: 'cocktails#index', as: 'cocktails'
-  post '/cocktails', to: 'cocktails#create'
+  post '/cocktails', to: 'cocktails#create', as: 'create_cocktail'
     #prefixes apply to all routes under it until a new prefix is created
+  get '/cocktails/new', to: 'cocktails#new', as: 'new_cocktail'
   get '/cocktails/:id', to: 'cocktails#show', as: 'cocktail'
     # :id -> this is a dynamic variable
       # represents anything after the slash

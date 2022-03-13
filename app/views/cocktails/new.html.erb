@@ -1,0 +1,17 @@
+<h1>New Cocktail Form</h1>
+
+<form action="<%= create_cocktail_path %>" method="POST">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
+    </div>
+    <div>
+        <label for="base">Base</label>
+        <input type="text" name="base" id="base">
+    </div>
+    <div>
+        <label for="instructions">Instructions</label>
+        <textarea name="description" id="description"></textarea>
+    </div>
+    <input type="submit" value="Create Cocktail">
+</form>

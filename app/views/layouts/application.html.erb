@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CocktailApp</title>
+    <title>Cocktail Central</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,12 @@
   </head>
 
   <body>
+    <nav style="display:flex; flex-direction:row; justify-content: space-around;">
+      <a href="http://localhost:3000/cocktails">Home</a>
+      <a href="http://localhost:3000/cocktails/new">Create a Cocktail</a>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
+

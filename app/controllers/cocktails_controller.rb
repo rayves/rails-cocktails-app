@@ -8,14 +8,18 @@ class CocktailsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        render json: @cocktails
+        # render json: @cocktails
+    end
+
+    def new
+
     end
 
     def create
         new_cocktail = {id: @cocktails.last["id"] + 1, name: params[:name], base: params[:base], instructions: params[:instructions]}
         @cocktails.push(new_cocktail)
         save_cocktails(@cocktails)
-        render json: new_cocktail, status: 201
+        redirect_to cocktails_path
     end
 
     def show
@@ -30,7 +34,7 @@ class CocktailsController < ApplicationController
         #     # # ALternate syntax
         #     # render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
         # end
-        render json: @cocktail
+        # render json: @cocktail
     end
 
     def update
