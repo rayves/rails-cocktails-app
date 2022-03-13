@@ -2,4 +2,19 @@
 <h3>Base Spirit: <%= @cocktail["base"].capitalize %></h3>
 <h4>Instructions</h4>
 <p><%= @cocktail["instructions"] %></p>
-<%= link_to "Back", :back %>
+
+<div>
+    <%= button_to "Edit", {action: "edit", id: @cocktail["id"]}, {method: :get} %>
+    <%= button_to "Delete", {action: "destroy", id: @cocktail["id"]}, form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+        <%#
+        # action = what action
+        # :id -> param - for the right cocktail page
+        # method:
+            # Default button tries to post
+        # form: { data: { turbo_confirm: "Are you sure?" } } -> confirmation notification
+        %>
+</div>
+<div>
+    <%= link_to "Back", cocktails_path %>
+</div>
+

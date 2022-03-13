@@ -1,0 +1,19 @@
+<h1>Update: <%= @cocktail["name"] %></h1>
+
+<form action="<%= update_cocktail_path(@cocktail["id"]) %>" method="POST">
+<input type="hidden" name="_method" value="put">
+<%# hidden input that overrides the method %>
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" value="<%= @cocktail["name"] %>">
+    </div>
+    <div>
+        <label for="base">Base</label>
+        <input type="text" name="base" id="base" value="<%= @cocktail["base"] %>">
+    </div>
+    <div>
+        <label for="instructions">Instructions</label>
+        <textarea name="instructions" id="instructions"><%= @cocktail["instructions"] %></textarea>
+    </div>
+    <input type="submit" value="Update Cocktail">
+</form>

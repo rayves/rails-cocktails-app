@@ -3,7 +3,7 @@ require 'json'
 class CocktailsController < ApplicationController
 
     before_action :load_cocktails
-    before_action :set_cocktail, only: [:show, :update, :destroy]
+    before_action :set_cocktail, only: [:show, :update, :destroy, :edit]
         # before action only on specified actions instead of all of them
     skip_before_action :verify_authenticity_token
 
@@ -12,6 +12,10 @@ class CocktailsController < ApplicationController
     end
 
     def new
+
+    end
+
+    def edit
 
     end
 
@@ -41,7 +45,7 @@ class CocktailsController < ApplicationController
         new_cocktail = {id: @cocktail["id"], name: params[:name], base: params[:base], instructions: params[:instructions]}
         @cocktails[@index] = new_cocktail
         save_cocktails(@cocktails)
-        render json: new_cocktail
+        redirect_to cocktail_path(new_cocktail[:id])
     end
 
     def destroy

@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   get '/cocktails/:id', to: 'cocktails#show', as: 'cocktail'
     # :id -> this is a dynamic variable
       # represents anything after the slash
-  put '/cocktails/:id', to: 'cocktails#update'
+  put '/cocktails/:id', to: 'cocktails#update', as: 'update_cocktail'
   patch '/cocktails/:id', to: 'cocktails#update'
     # referencing the same action is okay, when routing occurs put or patch will just lead to the same action.
   delete '/cocktails/:id', to: 'cocktails#destroy'
     # ruby already has a built in key word called delete therefore the method cannot be named delete.
+  get '/cocktails/:id/edit', to: 'cocktails#edit', as: 'edit_cocktail'
 end
