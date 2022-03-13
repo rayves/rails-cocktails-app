@@ -1,6 +1,14 @@
 GET http://localhost:3000/cocktails
 
 ###
+#Get valid cocktail
+GET http://localhost:3000/cocktails/1
+
+###
+#Get invalid cocktail
+GET http://localhost:3000/cocktails/1000
+
+###
 
 POST http://localhost:3000/cocktails
 content-type: application/json
@@ -10,3 +18,36 @@ content-type: application/json
     "base": "vodka",
     "instructions": "Put in vodka and colours"
 }
+###
+
+POST http://localhost:3000/cocktails
+content-type: application/json
+
+{
+    "name": "Martini",
+    "base": "gin",
+    "instructions": "Heaps of gin, a little vermouth, and extra olives plz"
+}
+
+###
+
+PUT http://localhost:3000/cocktails/4
+content-type: application/json
+
+{
+    "name": "Fruity Tingle",
+    "base": "vodka",
+    "instructions": "Put in vodka and colours"
+}
+
+###
+
+PUT http://localhost:3000/cocktails/5
+content-type: application/json
+
+{
+    "name": "Martini",
+    "base": "gin",
+    "instructions": "Heaps of gin, a little vermouth, and an olive"
+}
+

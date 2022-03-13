@@ -3,6 +3,8 @@ require 'json'
 class CocktailsController < ApplicationController
 
     before_action :load_cocktails
+    before_action :set_cocktail, only: [:show, :update]
+        # before action only on specified actions instead of all of them
     skip_before_action :verify_authenticity_token
 
     def index
@@ -17,18 +19,25 @@ class CocktailsController < ApplicationController
     end
 
     def show
-        cocktail = @cocktails.find {|cocktail| cocktail["id"] == params[:id].to_i}
-        if cocktail
-            render json: cocktail
-        else
-            # render json: {error: "Could not find cocktail"}, status: 404
-            render file: "public/404.html", status: :not_found, layout: false
-                # file because it is not a template (not inside the views folder)
+        # cocktail = @cocktails.find {|cocktail| cocktail["id"] == params[:id].to_i}
+        # if cocktail
+        #     render json: cocktail
+        # else
+        #     # render json: {error: "Could not find cocktail"}, status: 404
+        #     render file: "public/404.html", status: :not_found, layout: false
+        #         # file because it is not a template (not inside the views folder)
 
-            # # ALternate syntax
-            # render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
+        #     # # ALternate syntax
+        #     # render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
+        # end
+        render json: @cocktail
+    end
 
-        end
+    def update
+        new_cocktail = {id: @cocktail["id"], name: params[:name], base: params[:base], instructions: params[:instructions]}
+        @cocktails[@index] = new_cocktail
+        save_cocktails(@cocktails)
+        render json: new_cocktail
     end
 
     private
@@ -41,6 +50,17 @@ class CocktailsController < ApplicationController
 
     def save_cocktails(cocktails)
         File.write((Rails.public_path.join('cocktails.json')), JSON.pretty_generate(cocktails))
+    end
+
+    def set_cocktail
+            # saves cocktail where params id equals the id of the cocktail within the stored array of cocktails
+        @cocktail = @cocktails.find {|cocktail| cocktail["id"] == params[:id].to_i}
+            # takes the stored cocktail and using the id of that cocktails attempts to find the index value of that cocktail within the cocktails array
+        @index = @cocktails.index {|cocktail| cocktail["id"] == @cocktail["id"]}
+
+        unless @cocktail
+            render file: "public/404.html", status: :not_found, layout: false
+        end
     end
 
 end

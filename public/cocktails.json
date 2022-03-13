@@ -19,26 +19,14 @@
   },
   {
     "id": 4,
-    "name": "Fruit Tingle",
+    "name": "Fruity Tingle",
     "base": "vodka",
     "instructions": "Put in vodka and colours"
   },
   {
     "id": 5,
-    "name": "Fruit Tingle",
-    "base": "vodka",
-    "instructions": "Put in vodka and colours"
-  },
-  {
-    "id": 6,
-    "name": "Fruit Tingle",
-    "base": "vodka",
-    "instructions": "Put in vodka and colours"
-  },
-  {
-    "id": 7,
-    "name": "Fruit Tingle",
-    "base": "vodka",
-    "instructions": "Put in vodka and colours"
+    "name": "Martini",
+    "base": "gin",
+    "instructions": "Heaps of gin, a little vermouth, and an olive"
   }
 ]
