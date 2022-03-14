@@ -2,8 +2,8 @@
 
 <ul>
     <% @cocktails.each do |cocktail| %>
-        <li><%= link_to(cocktail["name"], cocktail_path(cocktail["id"])) %></li>
-            <%# 
+    <li><%= link_to(cocktail.name, cocktail_path(cocktail.id)) %></li>
+    <%# 
             # link_to(cocktail["name"] => string to be displayed
             # cocktail_path(cocktail["id"]) => link to redirect to
                 # redirects to the cocktail prefix with the provided id

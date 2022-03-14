@@ -1,11 +1,11 @@
-<h1><%= @cocktail["name"] %></h1>
-<h3>Base Spirit: <%= @cocktail["base"].capitalize %></h3>
+<h1><%= @cocktail.name %></h1>
+<h3>Base Spirit: <%= @cocktail.base_spirit.name.capitalize %></h3>
 <h4>Instructions</h4>
-<p><%= @cocktail["instructions"] %></p>
+<p><%= @cocktail.instructions %></p>
 
 <div>
-    <%= button_to "Edit", {action: "edit", id: @cocktail["id"]}, {method: :get} %>
-    <%= button_to "Delete", {action: "destroy", id: @cocktail["id"]}, form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+    <%= button_to "Edit", {action: "edit", id: @cocktail.id}, {method: :get} %>
+    <%= button_to "Delete", {action: "destroy", id: @cocktail.id}, form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
         <%#
         # action = what action
         # :id -> param - for the right cocktail page
@@ -17,4 +17,3 @@
 <div>
     <%= link_to "Back", cocktails_path %>
 </div>
-

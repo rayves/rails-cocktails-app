@@ -2,13 +2,15 @@ require 'json'
 
 class CocktailsController < ApplicationController
 
-    before_action :load_cocktails
+    # before_action :load_cocktails
     before_action :set_cocktail, only: [:show, :update, :destroy, :edit]
         # before action only on specified actions instead of all of them
     # skip_before_action :verify_authenticity_token
+    before_action :set_base_spirits, only: [:new]
 
     def index
         # render json: @cocktails
+        @cocktails = Cocktail.all
     end
 
     def new
@@ -20,9 +22,11 @@ class CocktailsController < ApplicationController
     end
 
     def create
-        new_cocktail = {id: @cocktails.last["id"] + 1, name: params[:name], base: params[:base], instructions: params[:instructions]}
-        @cocktails.push(new_cocktail)
-        save_cocktails(@cocktails)
+        # new_cocktail = {id: @cocktails.last["id"] + 1, name: params[:name], base: params[:base], instructions: params[:instructions]}
+        # @cocktails.push(new_cocktail)
+        # save_cocktails(@cocktails)
+        # redirect_to cocktails_path
+        Cocktail.create(cocktail_params)
         redirect_to cocktails_path
     end
 
@@ -42,39 +46,57 @@ class CocktailsController < ApplicationController
     end
 
     def update
-        new_cocktail = {id: @cocktail["id"], name: params[:name], base: params[:base], instructions: params[:instructions]}
-        @cocktails[@index] = new_cocktail
-        save_cocktails(@cocktails)
-        redirect_to cocktail_path(new_cocktail[:id])
+        # new_cocktail = {id: @cocktail["id"], name: params[:name], base: params[:base], instructions: params[:instructions]}
+        # @cocktails[@index] = new_cocktail
+        # save_cocktails(@cocktails)
+        # redirect_to cocktail_path(new_cocktail[:id])
+        @cocktail.update(cocktail_params)
     end
 
     def destroy
-        @cocktails.delete_at(@index)
-        save_cocktails(@cocktails)
-        redirect_to cocktails_path
+        # @cocktails.delete_at(@index)
+        # save_cocktails(@cocktails)
+        # redirect_to cocktails_path
     end
 
     private
 
-    def load_cocktails
-        # # if store in memory
-        # @cocktails = [{}]
-        @cocktails = JSON.parse(File.read(Rails.public_path.join('cocktails.json')))
-    end
+    # def load_cocktails
+    #     # # if store in memory
+    #     # @cocktails = [{}]
+    #     @cocktails = JSON.parse(File.read(Rails.public_path.join('cocktails.json')))
+    # end
 
-    def save_cocktails(cocktails)
-        File.write((Rails.public_path.join('cocktails.json')), JSON.pretty_generate(cocktails))
-    end
+    # def save_cocktails(cocktails)
+    #     File.write((Rails.public_path.join('cocktails.json')), JSON.pretty_generate(cocktails))
+    # end
 
     def set_cocktail
-            # saves cocktail where params id equals the id of the cocktail within the stored array of cocktails
-        @cocktail = @cocktails.find {|cocktail| cocktail["id"] == params[:id].to_i}
-            # takes the stored cocktail and using the id of that cocktails attempts to find the index value of that cocktail within the cocktails array
-        unless @cocktail
-            render file: "public/404.html", status: :not_found, layout: false
-            return
+        #     # saves cocktail where params id equals the id of the cocktail within the stored array of cocktails
+        # @cocktail = @cocktails.find {|cocktail| cocktail["id"] == params[:id].to_i}
+        #     # takes the stored cocktail and using the id of that cocktails attempts to find the index value of that cocktail within the cocktails array
+        # unless @cocktail
+        #     render file: "public/404.html", status: :not_found, layout: false
+        #     return
+        # end
+        # @index = @cocktails.index {|cocktail| cocktail["id"] == @cocktail["id"]}
+
+        begin
+            id = params[:id].to_i
+            @cocktail = Cocktail.find(id)
+        rescue
+            render file: Rails.public_path.join("404.html"), status: :not_found
         end
-        @index = @cocktails.index {|cocktail| cocktail["id"] == @cocktail["id"]}
+        
+    end
+
+    def set_base_spirits
+        @base_spirits = BaseSpirit.all
+    end
+
+    # method that applies constraints to what is passed into the params object
+    def cocktail_params
+        params.permit(:name, :base_spirit_id, :instructions)
     end
 
 end
