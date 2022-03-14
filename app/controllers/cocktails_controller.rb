@@ -5,7 +5,7 @@ class CocktailsController < ApplicationController
     before_action :load_cocktails
     before_action :set_cocktail, only: [:show, :update, :destroy, :edit]
         # before action only on specified actions instead of all of them
-    skip_before_action :verify_authenticity_token
+    # skip_before_action :verify_authenticity_token
 
     def index
         # render json: @cocktails

@@ -16,5 +16,11 @@
     "name": "Gin and Tonic",
     "base": "gin",
     "instructions": "Fill a high ball glass with ice. Add gin and lime juice. Then top with tonic water. Garnish with lime wedge or slice."
+  },
+  {
+    "id": 4,
+    "name": "mejito",
+    "base": "gin",
+    "instructions": "stuff and stuff"
   }
 ]

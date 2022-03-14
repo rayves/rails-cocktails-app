@@ -2,6 +2,7 @@
 
 <form action="<%= update_cocktail_path(@cocktail["id"]) %>" method="POST">
 <input type="hidden" name="_method" value="put">
+<input type="hidden" value=<%= form_authenticity_token %> name="authenticity_token">
 <%# hidden input that overrides the method %>
     <div>
         <label for="name">Name</label>

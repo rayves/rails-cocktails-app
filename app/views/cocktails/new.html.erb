@@ -1,6 +1,7 @@
 <h1>New Cocktail Form</h1>
 
 <form action="<%= create_cocktail_path %>" method="POST">
+<input type="hidden" value=<%= form_authenticity_token %> name="authenticity_token">
     <div>
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
@@ -15,3 +16,4 @@
     </div>
     <input type="submit" value="Create Cocktail">
 </form>
+
