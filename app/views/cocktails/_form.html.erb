@@ -1,0 +1,32 @@
+<% if @cocktail.errors.any? %>
+<h3><%= pluralize(@cocktail.errors.count, "error") %> prevented your cocktail from being made</h3>
+<ul>
+    <% @cocktail.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+</ul>
+<% end %>
+
+<%= form_with model: @cocktail do |form| %>
+<div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+</div>
+
+<div class="field">
+    <%= form.label :base_spirit_id %>
+    <%= form.select :base_spirit_id, @base_spirits.map {|spirit| [spirit.name.capitalize, spirit.id]} %>
+</div>
+
+<div class="field">
+    <%= form.label :instructions %>
+    <%= form.text_area :instructions %>
+</div>
+
+<div class="field">
+    <%# Changes the default buttun text from "Create Cocktail/Edit Cocktail" to "Create/Edit" %>
+    <%# form_message = @cocktail.id ? "Edit" : "Create" %>
+    <%#= form.submit form_message %>
+    <%= form.submit generate_button_text(@cocktail) %>
+</div>
+<% end %>

@@ -111,7 +111,8 @@ class CocktailsController < ApplicationController
 
     # method that applies constraints to what is passed into the params object
     def cocktail_params
-        params.permit(:name, :base_spirit_id, :instructions)
+        # Go into params, find the cocktails sub-hash, and only pass the permited values
+        params.require(:cocktail).permit(:name, :base_spirit_id, :instructions)
     end
 
 end
