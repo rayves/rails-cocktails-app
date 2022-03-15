@@ -10,11 +10,11 @@
 
 <form action="<%= create_cocktail_path %>" method="POST">
     <input type="hidden" value=<%= form_authenticity_token %> name="authenticity_token">
-    <div>
+    <div class="field">
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
     </div>
-    <div>
+    <div class="field">
         <%# <label for="base">Base</label>
         <input type="text" name="base" id="base"> %>
         <h5>Base</h5>
@@ -24,9 +24,11 @@
             <% end %>
         </select>
     </div>
-    <div>
+    <div class="field">
         <label for="instructions">Instructions</label>
         <textarea name="instructions" id="instructions"></textarea>
     </div>
-    <input type="submit" value="Create Cocktail">
+    <div class="field">
+        <input type="submit" value="Create Cocktail">
+    </div>
 </form>
