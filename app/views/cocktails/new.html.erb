@@ -1,4 +1,12 @@
 <h1>New Cocktail Form</h1>
+<% if @cocktail.errors.any? %>
+<h3><%= pluralize(@cocktail.errors.count, "error") %> prevented your cocktail from being made</h3>
+<ul>
+    <% @cocktail.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+</ul>
+<% end %>
 
 <form action="<%= create_cocktail_path %>" method="POST">
     <input type="hidden" value=<%= form_authenticity_token %> name="authenticity_token">

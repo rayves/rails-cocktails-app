@@ -1,5 +1,3 @@
-require 'json'
-
 class CocktailsController < ApplicationController
 
     # before_action :load_cocktails
@@ -14,7 +12,7 @@ class CocktailsController < ApplicationController
     end
 
     def new
-
+        @cocktail = Cocktail.new
     end
 
     def edit
@@ -26,8 +24,16 @@ class CocktailsController < ApplicationController
         # @cocktails.push(new_cocktail)
         # save_cocktails(@cocktails)
         # redirect_to cocktails_path
-        Cocktail.create(cocktail_params)
-        redirect_to cocktails_path
+        # Cocktail.create(cocktail_params)
+        @cocktail = Cocktail.new(cocktail_params)
+        if @cocktail.save
+            redirect_to cocktails_path           
+        else
+            # Render directly displays page instead of creating HTTP request and go through routing. Therefore where before actions for methods are required, errors will arise as those methods don't execute.
+            set_base_spirits
+                # for some reason the error status needs to be explicit otherwise the status after execution is stil 200
+            render "new", status: 422
+        end
     end
 
     def show
@@ -50,15 +56,21 @@ class CocktailsController < ApplicationController
         # @cocktails[@index] = new_cocktail
         # save_cocktails(@cocktails)
         # redirect_to cocktail_path(new_cocktail[:id])
-        @cocktail.update(cocktail_params)
-        redirect_to cocktail_path(@cocktail.id)
+        if @cocktail.update(cocktail_params)
+            redirect_to cocktail_path(@cocktail.id)
+        else
+            set_base_spirits
+            render "edit", status: 422
+        end
+        
     end
 
     def destroy
         # @cocktails.delete_at(@index)
         # save_cocktails(@cocktails)
         # redirect_to cocktails_path
-        @cocktail.delete
+        # @cocktail.delete
+        @cocktail.destroy
         redirect_to cocktails_path
     end
 

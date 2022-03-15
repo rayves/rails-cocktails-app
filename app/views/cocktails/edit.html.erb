@@ -1,4 +1,12 @@
 <h1>Update: <%= @cocktail.name %></h1>
+<% if @cocktail.errors.any? %>
+<h3><%= pluralize(@cocktail.errors.count, "error") %> prevented your cocktail from being made</h3>
+<ul>
+    <% @cocktail.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+</ul>
+<% end %>
 
 <form action="<%= update_cocktail_path(@cocktail.id) %>" method="POST">
     <input type="hidden" name="_method" value="put">
