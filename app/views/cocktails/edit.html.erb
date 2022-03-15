@@ -1,16 +1,22 @@
-<h1>Update: <%= @cocktail["name"] %></h1>
+<h1>Update: <%= @cocktail.name %></h1>
 
-<form action="<%= update_cocktail_path(@cocktail["id"]) %>" method="POST">
-<input type="hidden" name="_method" value="put">
-<input type="hidden" value=<%= form_authenticity_token %> name="authenticity_token">
-<%# hidden input that overrides the method %>
+<form action="<%= update_cocktail_path(@cocktail.id) %>" method="POST">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" value=<%= form_authenticity_token %> name="authenticity_token">
+    <%# hidden input that overrides the method %>
     <div>
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="<%= @cocktail["name"] %>">
+        <input type="text" name="name" id="name" value="<%= @cocktail.name %>">
     </div>
     <div>
-        <label for="base">Base</label>
-        <input type="text" name="base" id="base" value="<%= @cocktail["base"] %>">
+        <h5>Base</h5>
+        <select name="base_spirit_id">
+            <% @base_spirits.each do |spirit| %>
+            <option <%= spirit.id == @cocktail.base_spirit_id ? "selected" : "" %> value=<%= spirit.id %>>
+                <%= spirit.name.capitalize %>
+            </option>
+            <% end %>
+        </select>
     </div>
     <div>
         <label for="instructions">Instructions</label>

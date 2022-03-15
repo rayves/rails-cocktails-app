@@ -6,7 +6,7 @@ class CocktailsController < ApplicationController
     before_action :set_cocktail, only: [:show, :update, :destroy, :edit]
         # before action only on specified actions instead of all of them
     # skip_before_action :verify_authenticity_token
-    before_action :set_base_spirits, only: [:new]
+    before_action :set_base_spirits, only: [:new, :edit]
 
     def index
         # render json: @cocktails
@@ -51,12 +51,15 @@ class CocktailsController < ApplicationController
         # save_cocktails(@cocktails)
         # redirect_to cocktail_path(new_cocktail[:id])
         @cocktail.update(cocktail_params)
+        redirect_to cocktail_path(@cocktail.id)
     end
 
     def destroy
         # @cocktails.delete_at(@index)
         # save_cocktails(@cocktails)
         # redirect_to cocktails_path
+        @cocktail.delete
+        redirect_to cocktails_path
     end
 
     private
