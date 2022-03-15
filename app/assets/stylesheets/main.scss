@@ -15,3 +15,35 @@ form {
         margin-bottom: 1rem;
     }
 }
+
+.card-deck {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card {
+    flex: 1 0 200px;
+    background-color: white;
+    box-sizing: border-box;
+    margin: 1rem 0.25rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    h5 {
+        font-size: 1.25rem;
+        margin: 0.5rem;
+    }
+    p {
+        margin-left: 0.5rem;
+    }
+    a {
+        display: inline-block;
+        margin: 0.5rem;
+    }
+    transition: box-shadow 0.3s;
+    &:hover {
+        box-shadow: 0 0 11px #21212133;
+    }
+}

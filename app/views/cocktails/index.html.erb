@@ -1,12 +1,12 @@
-<h1>All The Cocktails</h1>
-
-<ul>
-    <% @cocktails.each do |cocktail| %>
-    <li><%= link_to(cocktail.name, cocktail_path(cocktail.id)) %></li>
-    <%# 
-            # link_to(cocktail["name"] => string to be displayed
-            # cocktail_path(cocktail["id"]) => link to redirect to
-                # redirects to the cocktail prefix with the provided id
-             %>
-    <% end %>
-</ul>
+<main id="cocktails-index">
+    <h1>All The Cocktails</h1>
+    <section class="card-deck">
+        <% @cocktails.each do |cocktail| %>
+        <div class="card">
+            <h5><%= cocktail.name %></h5>
+            <p><%= cocktail.instructions %></p>
+            <%= link_to "See more", cocktail_path(cocktail.id) %>
+        </div>
+        <% end %>
+    </section>
+</main>
