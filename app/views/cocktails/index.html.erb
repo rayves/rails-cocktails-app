@@ -2,7 +2,8 @@
     <h1>All The Cocktails</h1>
     <section class="card-deck">
         <% @cocktails.each do |cocktail| %>
-        <div class="card">
+        <%# select_border_color(cocktail.base_spirit_id) -> passing in the id of the element and the method returns the color of that corresponding id %>
+        <div class="card" style="<%= select_border_color(cocktail.base_spirit_id) %>">
             <h5><%= cocktail.name %></h5>
             <p><%= cocktail.instructions %></p>
             <%= link_to "See more", cocktail_path(cocktail.id) %>
